@@ -23,3 +23,5 @@ jobs:
             build*/*.g3a
 ```[cite: 1]
 
+5. Clique sur le bouton vert **Commit changes...** en haut à droite, puis valide.
+6. Va dans l'onglet **Actions** : le job va redémarrer automatiquement et passer au vert.
