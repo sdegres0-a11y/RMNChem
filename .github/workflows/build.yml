@@ -28,7 +28,3 @@ jobs:
           path: |
             *.g3a
             build*/*.g3a
-```[cite: 1]
-
-4. Clique sur **Commit changes...** puis confirme avec **Commit changes**.
-5. Retourne dans l'onglet **Actions** : le téléchargement de l'image va fonctionner sans erreur de permission et lancer la compilation de `RMNChem.g3a`[cite: 1].
