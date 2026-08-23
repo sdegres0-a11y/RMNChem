@@ -7,19 +7,35 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up fxSDK & gint
-        uses: Lephenixnoir/setup-fxsdk@v1
+      - name: Install toolchain dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git cmake python3 python3-pip libpng-dev libusb-1.0-0-dev gcc g++ make
+
+      - name: Install GiteaPC and Casio SDK
+        run: |
+          pip3 install giteapc
+          export PATH="$HOME/.local/bin:$PATH"
+          giteapc install -y Lephenixnoir/sh-elf-binutils
+          giteapc install -y Lephenixnoir/sh-elf-gcc
+          giteapc install -y Lephenixnoir/fxlibc
+          giteapc install -y Lephenixnoir/fxsdk
+          giteapc install -y Lephenixnoir/gint
 
       - name: Build G3A
-        run: fxsdk build-cg
+        run: |
+          export PATH="$HOME/.local/bin:/opt/sh-elf/bin:$PATH"
+          fxsdk build-cg
 
       - name: Upload binary
         uses: actions/upload-artifact@v4
         with:
           name: RMNChem-g3a
-          path: "*.g3a"
+          path: |
+            *.g3a
+            build*/*.g3a
