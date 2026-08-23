@@ -23,16 +23,3 @@ jobs:
             build*/*.g3a
 ```[cite: 1]
 
-5. Clique sur le bouton vert **Commit changes...** puis confirme avec **Commit changes**.
-
----
-
-### 2. Relancer et vérifier
-1. Retourne dans l'onglet **`Actions`**.
-2. Une nouvelle ligne **Build G3A** démarre automatiquement.
-3. Dès qu'elle passe au **vert ✅** :
-   * Clique dessus.
-   * Descends dans la section **Artifacts**.
-   * Clique sur **`RMNChem-g3a`** pour télécharger le fichier compilé.
-
-*(Si elle repasse en rouge, clique sur la ligne rouge pour voir l'étape en échec et envoie-moi une capture du message d'erreur).*
