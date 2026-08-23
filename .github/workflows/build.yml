@@ -8,23 +8,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: docker.io/lephenixnoir/fxsdk:latest
-      options: --user root
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Safe directory
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Set up fxSDK & gint
+        uses: Lephenixnoir/setup-fxsdk@v1
 
-      - name: Compile G3A
+      - name: Build G3A
         run: fxsdk build-cg
 
       - name: Upload binary
         uses: actions/upload-artifact@v4
         with:
           name: RMNChem-g3a
-          path: |
-            *.g3a
-            build*/*.g3a
+          path: "*.g3a"
