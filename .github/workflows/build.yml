@@ -1,0 +1,39 @@
+name: Build G3A
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: ghcr.io/lephenixnoir/fxsdk:latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Casio G3A
+        run: |
+          fxsdk build-cg
+
+      - name: Upload G3A
+        uses: actions/upload-artifact@v4
+        with:
+          name: RMNChem-g3a
+          path: "*.g3a"
+```[cite: 1]
+
+4. Clique sur **Commit changes**.
+
+---
+
+### Étape 4 : Récupérer ton fichier `.g3a`
+1. Clique sur l'onglet **Actions** tout en haut de la page de ton dépôt.
+2. Tu verras une ligne avec un cercle orange qui tourne (le serveur compile ton code en ligne).
+3. Au bout d'environ 30 à 60 secondes, le cercle devient un **crochet vert** ✅.
+4. Clique sur la ligne verte, puis descends en bas de page dans la section **Artifacts** : clique sur **`RMNChem-g3a`** pour télécharger l'archive contenant ton fichier `.g3a` prêt à l'emploi.
+
+---
+
+### Étape 5 : Mise sur la calculatrice
+1. Décompresse le fichier téléchargé pour extraire `RMNChem.g3a`[cite: 1].
+2. Branche la calculatrice en USB $\rightarrow$ **[F1] Lecteur Flash**.
+3. Colle `RMNChem.g3a` directement à la racine de `Lecteur USB (D:)` (pas dans `@MainMem`).
+4. Débranche : l'icône apparaît sur la calculatrice.
