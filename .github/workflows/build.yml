@@ -11,29 +11,28 @@ jobs:
 
       - name: Build Casio G3A
         run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           fxsdk build-cg
 
       - name: Upload G3A
         uses: actions/upload-artifact@v4
         with:
           name: RMNChem-g3a
-          path: "*.g3a"
+          path: |
+            *.g3a
+            build*/*.g3a
 ```[cite: 1]
 
-4. Clique sur **Commit changes**.
+5. Clique sur le bouton vert **Commit changes...** puis confirme avec **Commit changes**.
 
 ---
 
-### Étape 4 : Récupérer ton fichier `.g3a`
-1. Clique sur l'onglet **Actions** tout en haut de la page de ton dépôt.
-2. Tu verras une ligne avec un cercle orange qui tourne (le serveur compile ton code en ligne).
-3. Au bout d'environ 30 à 60 secondes, le cercle devient un **crochet vert** ✅.
-4. Clique sur la ligne verte, puis descends en bas de page dans la section **Artifacts** : clique sur **`RMNChem-g3a`** pour télécharger l'archive contenant ton fichier `.g3a` prêt à l'emploi.
+### 2. Relancer et vérifier
+1. Retourne dans l'onglet **`Actions`**.
+2. Une nouvelle ligne **Build G3A** démarre automatiquement.
+3. Dès qu'elle passe au **vert ✅** :
+   * Clique dessus.
+   * Descends dans la section **Artifacts**.
+   * Clique sur **`RMNChem-g3a`** pour télécharger le fichier compilé.
 
----
-
-### Étape 5 : Mise sur la calculatrice
-1. Décompresse le fichier téléchargé pour extraire `RMNChem.g3a`[cite: 1].
-2. Branche la calculatrice en USB $\rightarrow$ **[F1] Lecteur Flash**.
-3. Colle `RMNChem.g3a` directement à la racine de `Lecteur USB (D:)` (pas dans `@MainMem`).
-4. Débranche : l'icône apparaît sur la calculatrice.
+*(Si elle repasse en rouge, clique sur la ligne rouge pour voir l'étape en échec et envoie-moi une capture du message d'erreur).*
