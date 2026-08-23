@@ -1,38 +1,28 @@
 name: Build G3A
-on: [push, workflow_dispatch]
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/lephenixnoir/fxsdk:latest
+      options: --user root
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install dependencies and tools
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y git cmake python3 python3-pip libpng-dev libusb-1.0-0-dev gcc-sh-elf || true
-          pip3 install giteapc --break-system-packages || pip3 install giteapc
-          giteapc install -y Lephenixnoir/fxsdk Lephenixnoir/gint
+      - name: Safe directory
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
-      - name: Build Casio G3A
-        run: |
-          fxsdk build-cg
+      - name: Compile G3A
+        run: fxsdk build-cg
 
-      - name: Upload G3A
+      - name: Upload binary
         uses: actions/upload-artifact@v4
         with:
           name: RMNChem-g3a
-          path: |
-            *.g3a
-            build*/*.g3a
-```[cite: 1]
-
-4. En haut à droite, clique sur **Commit changes...**
-5. Dans le champ du message, mets simplement : `fix build`
-6. Valide avec **Commit changes**.
-
----
-
-### 2. Vérification
-Va dans l'onglet **Actions** : le job `fix build` démarre. Cette configuration utilise l'environnement direct de GitHub et contourne tous les blocages de conteneurs.
+          path: "*.g3a"
