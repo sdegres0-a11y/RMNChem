@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/lephenixnoir/fxsdk:latest
+      image: docker.io/lephenixnoir/fxsdk:latest
       options: --user root
     steps:
       - name: Checkout repository
@@ -25,4 +25,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: RMNChem-g3a
-          path: "*.g3a"
+          path: |
+            *.g3a
+            build*/*.g3a
+```[cite: 1]
+
+4. Clique sur **Commit changes...** puis confirme avec **Commit changes**.
+5. Retourne dans l'onglet **Actions** : le téléchargement de l'image va fonctionner sans erreur de permission et lancer la compilation de `RMNChem.g3a`[cite: 1].
